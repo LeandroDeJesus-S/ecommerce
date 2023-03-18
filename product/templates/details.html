@@ -9,8 +9,8 @@
                 <div class="row no-gutters">
                     <div class="col-lg-12">
 
-                        {% if product.image %}
-                            <img class="img-fluid" src="{{product.image.url}}">
+                        {% if product_detail.image %}
+                            <img class="img-fluid" src="{{product_detail.image.url}}">
                         {% endif %}
 
                     </div>
@@ -18,32 +18,31 @@
             </div>
             <div class="col-lg">
                 <div class="mt-4 mt-lg-0">
-                    <h1 class="h2">{{product.name}}</h1>
-                    <p class="lead">{{product.short_description|linebreaks}}</p>
+                    <h1 class="h2">{{product_detail.name}}</h1>
+                    <p class="lead">{{product_detail.short_description|linebreaks}}</p>
                     
                     <p class="lead">
 
-                        {% if product.promotional_marketing_price %}
+                        {% if product_detail.promotional_marketing_price %}
                             <span id="variation-preco-promocional" class="lead product-price">
-                                {{product.promotional_marketing_price|format_money}}
+                                {{product_detail.promotional_marketing_price|format_money}}
                             </span>
                             <span id="variation-preco"
                                 class="lead product-old-price text-muted">
-                                {{product.marketing_price|format_money}}
+                                {{product_detail.marketing_price|format_money}}
                             </span>
                         {% else %}
                             <span id="variation-preco"
-                            class="lead product-price">{{product.marketing_price|format_money}}</span>
+                            class="lead product-price">{{product_detail.marketing_price|format_money}}</span>
                         {% endif %}
                     </p>
 
                     <form action="{% url 'product:add_to_cart' %}" id="form-add-to-cart">
                         <div class="form-group">
-                            {% comment %} {% if product.variation_type == 'V' %} {% endcomment %}
                             
                                 <select id="select-variacoes" name="vid" class="form-control form-control-lg">
 
-                                    {% for variation in product.variacao_set.all %}
+                                    {% for variation in product_detail.variacao_set.all %}
                                         {% if variation.promotional_price %}
                                         
                                             <option data-preco="{{variation.price|format_money}}" 
@@ -66,7 +65,6 @@
                                     
                                 </select>
 
-                            {% comment %} {% endif %} {% endcomment %}
                         </div>
 
                         <div class="text-left">
@@ -88,7 +86,7 @@
                 <div class="mt-5 mb-5">
                     <h2 class="text-center">Descrição</h2>
                     <hr>
-                    <p>{{product.long_description|linebreaksbr}}</p>
+                    <p>{{product_detail.long_description|linebreaksbr}}</p>
 
                 </div>
             </div>

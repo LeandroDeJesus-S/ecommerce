@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'phonenumber_field',
-    'order',
+    'crispy_forms',
+    'crispy_bootstrap4',
     'perfil',
+    'order',
     'product',
     
     
@@ -48,7 +50,7 @@ INSTALLED_APPS = [
     
     
     
-    # TODO: remove this
+    # TODO: remove this | debug toolbar
     'debug_toolbar',
 ]
 
@@ -60,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # TODO: remove this
+    # TODO: remove this | debug toolbar
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
@@ -155,12 +157,15 @@ MESSAGE_TAGS = {
     constants.ERROR: 'alert-danger',
 }
 
+# crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 # sessions
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # s * min * h * days
 SESSION_SAVE_EVERY_REQUEST = False
 
 
-# TODO: Remove
+# TODO: Remove | debug toolbar
 INTERNAL_IPS = [
     '127.0.0.1',
 ]

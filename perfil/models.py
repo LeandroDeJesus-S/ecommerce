@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from utils.validacpf import valida_cpf
 from django.core.validators import RegexValidator
-from phonenumber_field.modelfields import PhoneNumberField
 
 STATE_CHOICES = [
     ('AC', 'Acre'),
@@ -40,8 +39,8 @@ class Perfil(models.Model):
         max_length=11, validators=[valida_cpf], verbose_name='CPF'
     )
     address = models.CharField(max_length=100, verbose_name='Endereço')
-    number = models.CharField(max_length=5)
-    complement = models.CharField(max_length=30)
+    number = models.CharField(max_length=5, verbose_name='Número')
+    complement = models.CharField(max_length=30, verbose_name='Complemento')
     neighborhood = models.CharField('Bairro', max_length=30)
     cep = models.CharField(
         'CEP', max_length=8, validators=[RegexValidator('^\d{8}$')]
@@ -52,10 +51,11 @@ class Perfil(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.user
+        return self.user.username
 
     def clean(self) -> None:
-        return super().clean()
+        super().clean()
+        
     
     class Meta:
         verbose_name = 'Perfil'

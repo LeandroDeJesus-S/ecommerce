@@ -1,4 +1,5 @@
 import re
+from django.core.exceptions import ValidationError
 
 def valida_cpf(cpf):
     cpf = str(cpf)
@@ -33,7 +34,5 @@ def valida_cpf(cpf):
 
     # Descobri que sequências avaliavam como verdadeiro, então também
     # adicionei essa checagem aqui
-    if cpf == novo_cpf and not sequencia:
-        return True
-    else:
-        return False
+    if cpf != novo_cpf or sequencia:
+        raise ValidationError('CPF inválido.')

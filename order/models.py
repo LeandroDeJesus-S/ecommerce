@@ -32,6 +32,7 @@ STATUS_CHOICES = (
 class Pedido(models.Model):
     user = models.ForeignKey(User, models.DO_NOTHING, verbose_name='Usuário')
     total = models.FloatField()
+    total_quantity = models.PositiveIntegerField()
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='C')
     
     def __str__(self):

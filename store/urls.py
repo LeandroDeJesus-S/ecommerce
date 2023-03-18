@@ -20,9 +20,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('product.urls')),
-    path('perfil/', include('perfil.urls')),
     path('order/', include('order.urls')),
+    path('perfil/', include('perfil.urls')),
+    path('', include('product.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # TODO: Remove

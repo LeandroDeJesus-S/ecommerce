@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Produto, Variacao
 
 
-class VariacaoInline(admin.TabularInline):
+class VariacaoInline(admin.StackedInline):
     model = Variacao
     extra = 1
 
@@ -16,8 +16,10 @@ class ProdutoAdmin(admin.ModelAdmin):
     list_display_links = ['id', 'name']
     ordering = ['id']
 
+
 class VariacaoAdmin(admin.ModelAdmin):
     list_display = ['name', 'stock',]
+    
 
 admin.site.register(Produto, ProdutoAdmin)
 admin.site.register(Variacao, VariacaoAdmin)

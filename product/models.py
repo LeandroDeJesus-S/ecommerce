@@ -28,7 +28,10 @@ class Produto(models.Model):
     
     def save(self, *args, **kwargs) -> None:
         if not self.slug:
-            pk = Produto.objects.all().order_by('-id').first().id + 1
+            try:
+                pk = Produto.objects.all().order_by('-id').first().id + 1
+            except:
+                pk = 1
             self.slug = f'{slugify(self.name)}-{pk}'
             
         super().save(*args, **kwargs)
@@ -57,7 +60,9 @@ class Produto(models.Model):
  
 class Variacao(models.Model):
     product = models.ForeignKey(Produto, models.CASCADE, verbose_name='Produto')
-    name = models.CharField('Nome', max_length=255)
+    name = models.CharField(
+        'Nome', max_length=255, default=product.name
+    )
     price = models.FloatField('Preço')
     promotional_price = models.FloatField('Preço promocional', default=0)
     stock = models.PositiveIntegerField('Estoque', default=1)
@@ -69,3 +74,4 @@ class Variacao(models.Model):
     class Meta:
         verbose_name = 'Variação'
         verbose_name_plural = 'Variações'
+        

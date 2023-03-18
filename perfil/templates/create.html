@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+    
+    {% if not request.user.is_authenticated %}
+    <div class="col-lg">
+            <h4>Login</h4>
+
+            <form method="post" action="{% url 'perfil:login' %}">{% csrf_token %}
+                <div class="form-group">
+                  <label for="inputUsuario">Nome de usuário</label>
+                  <input type="text" name="username" class="form-control" id="inputUsuario" 
+                  aria-describedby="usuarioHelp" placeholder="Digite seu usuário.">
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword">Senha</label>
+                  <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Digite sua senha.">
+                </div>
+                <button type="submit" class="btn btn-primary btn-clock btn-lg">Login</button>
+            </form>
+
+        </div>
+    {% endif %}
+        <div class="col-lg ">
+            {% block title_cadaster %}
+                <h4>Cadastro</h4>
+            {% endblock title_cadaster %}
+            <form method="post" action="">
+                {% csrf_token %}
+                {{user_form|crispy}}
+                {{perfil_form|crispy}}
+                <div class="row">
+                    <div class="col-lg">
+                        {% block form_cad_button %}
+                            <button type="submit" class="btn btn-primary btn-clock btn-lg">Cadastrar</button>
+                        {% endblock form_cad_button %}
+                    </div>
+                </div>
+            <form>
+        </div>
+</div>
+{% endblock content %}
