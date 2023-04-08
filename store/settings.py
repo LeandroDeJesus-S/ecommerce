@@ -14,7 +14,7 @@ from pathlib import Path
 from django.contrib.messages import constants
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('ENGINE'),
+        'ENGINE': f'django.db.backends.{os.getenv("ENGINE")}',
         'NAME': os.getenv('NAME_DB'),
         'USER': os.getenv('USER_DB'),
         'PASSWORD': os.getenv('PASSWORD'),
