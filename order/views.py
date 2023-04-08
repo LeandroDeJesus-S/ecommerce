@@ -1,10 +1,8 @@
 from django.shortcuts import render, redirect
 from utils import functions
-from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.http import HttpResponse
 from django.contrib import messages
 
 from product.models import Variacao
@@ -19,10 +17,7 @@ class LoginRequiredBaseMixin(LoginRequiredMixin, View):
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset(*args, **kwargs)
         qs = qs.filter(user=self.request.user)
-        return qs
-    
-    
-    
+        return qs 
 
 
 class Payment(LoginRequiredBaseMixin, DetailView):
@@ -113,5 +108,3 @@ class ListOrder(LoginRequiredBaseMixin, ListView):
     template_name = 'list_orders.html'
     paginate_by = 10
     ordering = ['-id']
-
-

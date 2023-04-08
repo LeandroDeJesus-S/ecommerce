@@ -5,6 +5,7 @@ from django.views import View
 from perfil.models import Perfil
 from django.contrib import messages
 from .models import Produto, Variacao
+from django.db.models import Q
 
 
 class ListProduct(ListView):
@@ -127,3 +128,22 @@ class PurchaseSummary(View):
             'cart': self.request.session.get('carrinho', {})
         }
         return render(self.request, 'salesummary.html', context)
+
+
+class SearchProduct(ListProduct):
+    def get_queryset(self, *args, **kwargs):
+        search_field = self.request.GET.get('search_field') or self.request.session.get('search_fiedl')
+        qs = super().get_queryset(*args, **kwargs)
+        if not search_field: return qs
+        
+        self.request.session['search_fiedl'] = search_field
+        
+        qs = qs.filter(
+            Q(name__icontains=search_field)|
+            Q(short_description__icontains=search_field)|
+            Q(long_description__icontains=search_field)
+        )
+        
+        self.request.session.save()
+        return qs
+    

@@ -36,7 +36,7 @@ class Perfil(models.Model):
     user = models.OneToOneField(User, models.CASCADE, verbose_name='Usuário')
     birthday = models.DateField(verbose_name='Data de nascimento')
     cpf = models.CharField(
-        max_length=11, validators=[valida_cpf], verbose_name='CPF'
+        max_length=11, validators=[valida_cpf], verbose_name='CPF', unique=True
     )
     address = models.CharField(max_length=100, verbose_name='Endereço')
     number = models.CharField(max_length=5, verbose_name='Número')

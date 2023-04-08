@@ -24,8 +24,3 @@ urlpatterns = [
     path('perfil/', include('perfil.urls')),
     path('', include('product.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# TODO: Remove
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += path('__debug__/', include(debug_toolbar.urls)),

@@ -60,9 +60,13 @@
             </li>
 
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        <form class="form-inline my-2 my-lg-0" 
+        action="{% url 'product:search_product' %}" method="get">
+        {% csrf_token %}
+            <input class="form-control mr-sm-2" 
+            type="search" placeholder="Buscar produto"
+             aria-label="Search" name="search_field" value="{{request.GET.search_field}}">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
         </form>
     </div>
 </nav>

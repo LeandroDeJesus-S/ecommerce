@@ -44,14 +44,6 @@ INSTALLED_APPS = [
     'perfil',
     'order',
     'product',
-    
-    
-    
-    
-    
-    
-    # TODO: remove this | debug toolbar
-    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -62,8 +54,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # TODO: remove this | debug toolbar
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'store.urls'
@@ -163,9 +153,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # sessions
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # s * min * h * days
 SESSION_SAVE_EVERY_REQUEST = False
-
-
-# TODO: Remove | debug toolbar
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
